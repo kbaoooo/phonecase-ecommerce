@@ -19,9 +19,7 @@ import LoginModal from '@/components/LoginModal';
 function DesignPreview({configuration}: {configuration: Configuration}) {
     const router = useRouter();
     const {toast} = useToast();
-    const { user } = useKindeBrowserClient();
-
-    console.log(user);
+    const { isAuthenticated } = useKindeBrowserClient();
 
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
@@ -64,7 +62,7 @@ function DesignPreview({configuration}: {configuration: Configuration}) {
     })
 
     const handleCheckout = () => {
-        if(user) {
+        if(isAuthenticated) {
             // create payment session
             createPaymentSession({configId: configuration.id});
         } else {
